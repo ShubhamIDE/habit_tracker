@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:habit_tracker/datetime/date_time.dart';
 
 class MonthSummary extends StatelessWidget {
   final Map<DateTime, int>? datasets;
   final String startDate;
-  const MonthSummary({super.key, required this.datasets, required this.startDate});
+  const MonthSummary(
+      {super.key, required this.datasets, required this.startDate});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class MonthSummary extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25, bottom: 25),
       child: HeatMap(
         startDate: createDateTimeObject(startDate),
-        endDate: DateTime.now().add(Duration(days: 0)), 
+        endDate: DateTime.now().add(Duration(days: 0)),
         datasets: datasets,
         colorMode: ColorMode.color,
         defaultColor: Colors.grey[200],
@@ -21,7 +23,7 @@ class MonthSummary extends StatelessWidget {
         showText: true,
         scrollable: true,
         size: 30,
-        colorsets: const{
+        colorsets: const {
           1: Color.fromARGB(20, 2, 179, 8),
           2: Color.fromARGB(40, 2, 179, 8),
           3: Color.fromARGB(60, 2, 179, 8),
@@ -33,8 +35,9 @@ class MonthSummary extends StatelessWidget {
           9: Color.fromARGB(220, 2, 179, 8),
           10: Color.fromARGB(255, 2, 179, 8),
         },
-        onClick: (value){
-          
+        onClick: (value) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(value.toString())));
         },
       ),
     );
